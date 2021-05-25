@@ -63,6 +63,7 @@ export class RegisterPage implements OnInit {
   }
 
   signUp() {
+    console.log('hola')
     if (this.form.status === "VALID") {
       this.authService.signUp(this.form.value).subscribe(
         res => {
