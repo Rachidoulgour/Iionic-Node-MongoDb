@@ -15,15 +15,24 @@
         <ion-icon name="ios-mail-outline" item-left></ion-icon>
         <ion-input class="inpt-field" style=" font-size: 18px !important" type="text" formControlName="username" placeholder="Username" clearInput>
         </ion-input>
+        <ion-text color="danger" *ngIf="form.get('username').invalid">
+          <p>  El nombre tiene que tener entre 8 y 40 caracteres</p>
+        </ion-text>
       </ion-item>
       <ion-item style="position: relative !important;">
         <ion-icon name="ios-mail-outline" item-left></ion-icon>
         <ion-input class="inpt-field" style=" font-size: 18px !important" type="email" formControlName="email" placeholder="Email" clearInput>
         </ion-input>
+        <ion-text color="danger" *ngIf="form.get('email').invalid &&  form.get('email').touched">
+          <p>  Debes introducir un email</p>
+        </ion-text>
       </ion-item>
       <ion-item>
         <ion-icon name="ios-lock-outline" item-left></ion-icon>
         <ion-input type="password" formControlName="password" placeholder="Password" clearInput></ion-input>
+        <ion-text color="danger" *ngIf="form.get('password').invalid &&  form.get('password').touched">
+          <p> La contraseña debe contener al menos un numero, una letra y ser mayor que 8 carácteres</p>
+        </ion-text>
       </ion-item>
 
       <button ion-button block class="login-button" margin-vertical (click)="signUp()">Sign In</button>
