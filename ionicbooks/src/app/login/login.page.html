@@ -16,11 +16,18 @@
       <button ion-button block class="login-button" margin-vertical>Sign In</button>
 
       <p class="signup">
-        <button ion-button clear color="color3">
+        <button ion-button [routerLink]="['/register']" clear color="color3">
           Sign Up
         </button>
       </p>
     </ion-list>
+
+    <!-- <ion-text color="danger" *ngIf="error404">
+      <p> Contraseña o email erroneo</p>
+    </ion-text>
+    <ion-text color="danger" *ngIf="error501">
+      <p> No estás registrado</p>
+    </ion-text> -->
 
   </div>
 </ion-content>

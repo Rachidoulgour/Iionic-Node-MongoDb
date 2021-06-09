@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { NavController } from '@ionic/angular';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -22,7 +23,7 @@ export class LoginPage implements OnInit {
   form: FormGroup;
   matcher = new MyErrorStateMatcher();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public navCtrl: NavController) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -78,4 +79,8 @@ logIn() {
       )
     }
   }
+
+  // RegisterPage() {
+  //   this.navCtrl.
+  // }
 }

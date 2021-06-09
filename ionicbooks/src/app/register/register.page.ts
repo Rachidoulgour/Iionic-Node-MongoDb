@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { TokenService } from '../services/token.service';
 
 
 
@@ -21,7 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegisterPage implements OnInit {
   form: FormGroup;
   matcher = new MyErrorStateMatcher();
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private tokenService: TokenService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -68,8 +69,9 @@ export class RegisterPage implements OnInit {
     if (this.form.status === "VALID") {
       this.authService.signUp(this.form.value).subscribe(
         res => {
-          localStorage.setItem('token', res['token']);
-          localStorage.setItem('userId', JSON.stringify(res['user_id']))
+          this.tokenService.SetToken(res['token']);
+          // localStorage.setItem('token', res['token']);
+          // localStorage.setItem('userId', JSON.stringify(res['user_id']))
           // this.router.navigate(['/validate'])
           // this.message = "success"
         },
