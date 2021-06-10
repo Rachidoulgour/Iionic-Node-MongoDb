@@ -1,5 +1,5 @@
 const mongoose =require('mongoose');
-require('dotenv').config()
+
 async function startConnection(){
     await mongoose.connect('mongodb://localhost/ionicbooks', {
         useNewUrlParser: true,

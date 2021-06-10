@@ -6,15 +6,15 @@ const jwt = require('jsonwebtoken')
 
 
 
-export function saveUser(req, res) {
+function saveUser(req, res) {
     let params = req.body;
     const user = new User();
     if (params.username && params.email && params.password) {
         user.username = params.username;
         user.email = params.email;
         user.password = params.password;
-        user.role = 'user';
         user.terms = params.conditions;
+        user.role = 'user';
         user.avatar = null;
        
 
@@ -70,4 +70,11 @@ export function saveUser(req, res) {
             message: 'rellena todos los campos'
         })
     }
+}
+
+
+
+
+module.exports = {
+    saveUser
 }
