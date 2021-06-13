@@ -7,6 +7,7 @@ const api = express.Router();
 
 
 api.post('/signup', UserController.saveUser);
+api.post('/login', UserController.login);
 
 
 

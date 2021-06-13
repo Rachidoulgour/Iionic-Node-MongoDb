@@ -72,9 +72,57 @@ function saveUser(req, res) {
     }
 }
 
+function login(req, res) {
+    const params = req.body;
+    const email = params.email;
+
+    const password = params.password;
+
+    User.findOne({
+        email: email
+    }, (err, user) => {
+        if (err) return res.status(500).send({
+            message: 'error en la petición'
+        });
+        //console.log("Error",err)
+        if (user) {
+            
+            
+            bcrypt.compare(password, user.password, (err, check) => {
+                if (check) {
+                    user.password = undefined;
+                    const token = jwt.sign({
+                        _id: user._id
+                    }, process.env.TOKEN_SECRET || "Tokenimage", {
+                        expiresIn: 60 * 60 * 24
+                    });
+                    
+                    {
+                        res.json({
+                            token: token,
+                            user: user
+                        });
+                    }
+
+                } else {
+                    return res.status(404).send({
+                        message: 'no se ha podido identificar'
+                    })
+                }
+            });
+        
+        } else {
+            return res.status(404).send({
+                message: 'El usuario no se ha podido identificar'
+            })
+        }
+    })
+}
+
 
 
 
 module.exports = {
-    saveUser
+    saveUser,
+    login
 }
