@@ -26,7 +26,7 @@ const userSchema = Schema({
     },
     terms:{
         type: String,
-        required: true
+        
     },
     avatar: String,
     

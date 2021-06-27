@@ -45,15 +45,15 @@ export class RegisterPage implements OnInit {
       )),
       confirmPassword: new FormControl(null, 
          
-          Validators.required
+         Validators.required
           
         
-      ),
-      conditions: new FormControl(false, 
-        
-          Validators.required
-        
       )
+      // conditions: new FormControl(false, 
+        
+      //     Validators.required
+        
+      // )
     }, { validators: this.checkPasswords })
   }
 
@@ -65,7 +65,6 @@ export class RegisterPage implements OnInit {
   }
 
   signUp() {
-    console.log('hola')
     console.log(this.form.status)
     if (this.form.status === "VALID") {
       this.authService.signUp(this.form.value).subscribe(

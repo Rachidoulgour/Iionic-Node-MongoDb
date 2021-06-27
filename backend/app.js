@@ -11,11 +11,11 @@ const user_routes = require('./routes/users')
 
 
 //settings
-app.set('port', process.env.PORT || 5500);
+app.set('port', process.env.PORT || 5050);
 
 //CORS
 app.use(express.json());
-//app.use(cors());
+app.use(cors());
 
 app.use('/api', user_routes);
 

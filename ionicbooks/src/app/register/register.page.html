@@ -34,8 +34,14 @@
           <p> La contraseña debe contener al menos un numero, una letra y ser mayor que 8 carácteres</p>
         </ion-text>
       </ion-item>
-
-      <button ion-button block class="login-button" margin-vertical (click)="signUp()">Sign In</button>
+      <ion-item>
+        <ion-input type="password" formControlName="confirmPassword" matInput [errorStateMatcher]="matcher" placeholder="Repitir Contraseña"></ion-input>
+                <mat-error *ngIf="form.hasError('notSame')">
+                    Las contraseñas no coinciden
+                  </mat-error>  
+      </ion-item>
+      
+      <button ion-button block class="login-button" margin-vertical>Sign In</button>
     </form>
 
   </div>

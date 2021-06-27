@@ -7,13 +7,15 @@ const jwt = require('jsonwebtoken')
 
 
 function saveUser(req, res) {
+    console.log("BODY",req.body)
     let params = req.body;
+    console.log(params)
     const user = new User();
     if (params.username && params.email && params.password) {
         user.username = params.username;
         user.email = params.email;
         user.password = params.password;
-        user.terms = params.conditions;
+        //user.terms = params.conditions;
         user.role = 'user';
         user.avatar = null;
        
@@ -52,6 +54,7 @@ function saveUser(req, res) {
                             res.json({
                                 token: token,
                                 user_id: userSaved._id,
+                                user,
                                 message: "Usuario regitrsado"
                             });;
                         } else {
