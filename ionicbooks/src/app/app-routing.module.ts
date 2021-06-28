@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {TabPage} from './tab/tab.page'
 
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'home',
+  //   pathMatch: 'full'
+  // },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -19,6 +20,28 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: '',
+    loadChildren: () => import('./tab/tab.module').then( m => m.TabPageModule)
+  },
+  // {
+  //   path: 'tab',
+  //   component: TabPage,
+  //   children: [
+  //     {
+  //       path: 'home',
+         
+  //           loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+          
+       
+  //     },
+  //     {
+  //       path: '',
+  //       redirectTo: '/app/tab/home',
+  //       pathMatch: 'full'
+  //     }
+  //   ]
+  // }
 ];
 
 @NgModule({
