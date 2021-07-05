@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {TabPage} from './tab/tab.page'
+//import {TabPage} from './tab/tab.page'
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
+  // {
+  //   path: 'tab/home',
+  //   loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  // },
   // {
   //   path: '',
   //   redirectTo: 'home',
@@ -21,9 +21,17 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: '',
+    path: 'tab',
     loadChildren: () => import('./tab/tab.module').then( m => m.TabPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  // {
+  //   path: 'tab/publish',
+  //   loadChildren: () => import('./publish/publish.module').then( m => m.PublishPageModule)
+  // },
   // {
   //   path: 'tab',
   //   component: TabPage,

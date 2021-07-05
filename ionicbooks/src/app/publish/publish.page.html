@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Publicar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="publicate">
+    <h4>Intercambia tus libros y conectate con otros corazones</h4>
+    <div class="card-body">
+        <form [formGroup]="form" (submit)="onSubmit()">
+            
+            <input type="text" formControlName="title"  placeholder="¡Titulo!">
+            <input type="text" formControlName="author" placeholder="¡Autor!">
+            <textarea formControlName="text"  placeholder="¡Descripción!"></textarea>
+            <input type="file" formControlName="file" placeholder="sube la imagen" (change)="fileChangeEvent($event)">
+            
+            <button type="submit">Publicar</button>
+        </form>
+    </div>
+</div>
+
+</ion-content>

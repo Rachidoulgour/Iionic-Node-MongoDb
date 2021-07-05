@@ -14,25 +14,29 @@ import { Routes, RouterModule } from '@angular/router';
 /////////
 const routes: Routes = [
   {
-    // path: '',
-    // component: TabPage
-   path: 'tab',
+   path: '',
     component: TabPage,
     children: [
       {
         path: 'home',
-         
             loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
-          
-       
       },
       {
-        path: '',
-        redirectTo: '/app/tab/home',
+        path: 'publish',
+            loadChildren: () => import('../publish/publish.module').then( m => m.PublishPageModule)
+      },
+      {
+        path: 'profile',
+            loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
+      },
+      
+    ]
+  },
+  {
+        path: 'tab',
+        redirectTo: '/tab/home',
         pathMatch: 'full'
       }
-    ]
-  }
 ];
 /////////////////
 
