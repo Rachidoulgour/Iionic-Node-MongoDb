@@ -7,7 +7,8 @@ const cors = require('cors');
 
 const app = express();
 
-const user_routes = require('./routes/users')
+const user_routes = require('./routes/users');
+const publication_routes = require('./routes/publications')
 
 
 //settings
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api', user_routes);
+app.use('/api', publication_routes);
 
 
 
