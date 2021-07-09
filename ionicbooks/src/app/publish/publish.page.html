@@ -10,12 +10,12 @@
     <div class="card-body">
         <form [formGroup]="form" (submit)="onSubmit()">
             
-            <input type="text" formControlName="title"  placeholder="¡Titulo!">
-            <input type="text" formControlName="author" placeholder="¡Autor!">
-            <textarea formControlName="text"  placeholder="¡Descripción!"></textarea>
-            <input type="file" formControlName="file" placeholder="sube la imagen" (change)="fileChangeEvent($event)">
+            <ion-input type="text" formControlName="title"  placeholder="¡Titulo!"></ion-input>
+            <ion-input type="text" formControlName="author" placeholder="¡Autor!"></ion-input>
+            <ion-textarea formControlName="text"  placeholder="¡Descripción!"></ion-textarea>
+            <ion-input type="file" formControlName="file" placeholder="sube la imagen" (change)="fileChangeEvent($event)"></ion-input>
             
-            <button type="submit">Publicar</button>
+            <ion-button type="submit">Publicar</ion-button>
         </form>
     </div>
 </div>
