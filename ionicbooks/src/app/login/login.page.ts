@@ -3,16 +3,20 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '
 import { AuthService } from '../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { NavController } from '@ionic/angular';
+import { TokenService } from '../services/token.service';
+
+import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
-    const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
+// export class MyErrorStateMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+//     const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
+//     const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
 
-    return (invalidCtrl || invalidParent);
-  }
-}
+//     return (invalidCtrl || invalidParent);
+//   }
+// }
 
 @Component({
   selector: 'app-login',
@@ -20,64 +24,59 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  form: FormGroup;
-  matcher = new MyErrorStateMatcher();
-
-  constructor(private authService: AuthService, public navCtrl: NavController) { }
-
-  ngOnInit() {
-    this.form = new FormGroup({
-      username: new FormControl(null, 
-        Validators.compose([Validators.minLength(8), Validators.maxLength(20)],
-      )),
-      email: new FormControl(null, 
-        [
-          Validators.email,
-          Validators.required
-        ]
-      ),
-      password: new FormControl(null,
-        Validators.compose([ 
-          Validators.required,
-          Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)
-        ]
-        
-      )),
-      confirmPassword: new FormControl(null, 
-         
-          Validators.required
-          
-        
-      ),
-      conditions: new FormControl(false, 
-        
-          Validators.required
-        
-      )
-    }, { validators: this.checkPasswords })
+  error404;
+  error501;
+  user = {
+    email: "",
+    password: ""
   }
+  // form: FormGroup;
+  // matcher = new MyErrorStateMatcher();
 
-  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-    let pass = group.controls.password.value;
-    let confirmPass = group.controls.confirmPassword.value;
+  constructor(private authService: AuthService, 
+    private tokenService: TokenService, 
+    private storage: Storage,
+    public navCtrl: NavController,
+    private router: Router) { }
 
-    return pass === confirmPass ? null : { notSame: true }
+  async ngOnInit() {
+    await this.storage.create();
   }
 
 logIn() {
-    if (this.form.status === "VALID") {
-      this.authService.logIn(this.form.value).subscribe(
-        res => {
-          localStorage.setItem('token', res['token']);
-          localStorage.setItem('userId', JSON.stringify(res['user_id']))
-          // this.router.navigate(['/validate'])
-          // this.message = "success"
-        },
-        err => {
-          console.log(err)
-        }
-      )
+  this.authService.logIn(this.user).subscribe(
+    res => {
+      this.tokenService.SetToken(res.token)
+      this.tokenService.SetUser(JSON.stringify(res.user))
+      this.router.navigate(['/tab/home'])
+      // localStorage.setItem('token', res.token);
+      // localStorage.setItem('user', JSON.stringify(res.user));
+      
+
+    },
+    err => {
+      console.log(err)
+      if (err.status === 404) {
+        this.error404 = err.status
+      } else if (err.status === 501) {
+        this.error501 = err.status
+      }
     }
+  )
+  
+    // if (this.form.status === "VALID") {
+    //   this.authService.logIn(this.form.value).subscribe(
+    //     res => {
+    //       localStorage.setItem('token', res['token']);
+    //       localStorage.setItem('userId', JSON.stringify(res['user_id']))
+    //       // this.router.navigate(['/validate'])
+    //       // this.message = "success"
+    //     },
+    //     err => {
+    //       console.log(err)
+    //     }
+    //   )
+    // }
   }
 
   // RegisterPage() {

@@ -1,5 +1,26 @@
 <ion-content class="sign" padding>
-  <div ion-fixed padding class="appForm" margin-bottom style="position: absolute !important;top:0%;bottom: 0%;left:0;margin-bottom: 1% !important; height: auto !important">
+  <div class="login">
+    <div class="login-form">
+        <form (submit)="logIn()">
+            <p>Entra y conectate con otras mentes</p>
+            <div class="inputs">
+                <input type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required>
+                <input type="password" name="password" [(ngModel)]="user.password" placeholder="Contraseña" required
+                    minlength="6">
+            </div>
+            <button type="submit">Entrar</button>
+            <a [routerLink]="['/recuperar-password']">¿Olviaste la contraseña?</a>
+        </form>
+        <!-- <div class="error" *ngIf="error404">
+            <p>Contraseña o email erroneo</p>
+        </div>
+        <div class="error" *ngIf="error501">
+            <p>No estás registrado</p>
+        </div> -->
+
+    </div>
+</div>
+  <!-- <div ion-fixed padding class="appForm" margin-bottom style="position: absolute !important;top:0%;bottom: 0%;left:0;margin-bottom: 1% !important; height: auto !important">
     <div class="logo">
       <img src="http://placehold.it/50x50">
     </div>
@@ -20,7 +41,7 @@
           Sign Up
         </button>
       </p>
-    </ion-list>
+    </ion-list> -->
 
     <!-- <ion-text color="danger" *ngIf="error404">
       <p> Contraseña o email erroneo</p>
@@ -29,5 +50,5 @@
       <p> No estás registrado</p>
     </ion-text> -->
 
-  </div>
+  <!-- </div> -->
 </ion-content>

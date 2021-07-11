@@ -17,6 +17,7 @@
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
+    "mongoose-pagination": "^1.0.0",
     "nodemon": "^2.0.7",
     "path": "^0.12.7"
   }

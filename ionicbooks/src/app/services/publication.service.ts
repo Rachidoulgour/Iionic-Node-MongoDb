@@ -40,7 +40,12 @@ export class PublicationService {
 //     headers,
 //   params});
 // }
-
+addPublication(userId, publication){
+  let params = JSON.stringify(publication);
+    
+    let headers = new HttpHeaders().set('Content-Type', 'application/json') 
+    return this.http.post(this.URL + '/publication/'+userId, params, {headers});
+}
 getHomepageExchangeBooks(): Observable<any>{
   let headers = new HttpHeaders().set('Content-Type', 'application/json') 
   return this.http.get(this.URL + '/home-exchange-books/' ,{headers});
