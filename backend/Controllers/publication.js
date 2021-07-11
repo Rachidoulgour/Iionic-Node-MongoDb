@@ -99,9 +99,34 @@ function getAvatarFile(req, res){
         }
     })
 }
+function getPublications(req, res){
+    console.log(req.params.page)
+    if(req.params.page){
+        page= +req.params.page;        
+    }
+    const itemsPerPage = 10;
+        Publication.find({is_eliminated: false}).sort('-created_at').populate('user').paginate(page, itemsPerPage, (err, publications, total)=>{
+            if(err) return res.status(500).send({message: 'error de recibir publicaciones'});
+            if(!publications) return res.status(404).send({message: 'no hay publicaciones'});
+            publications.forEach(function(publication){
+                publication.user.password = undefined;
+            })
+            
+            return res.status(200).send({
+                total_items: total,
+                pages: Math.ceil(total/itemsPerPage),
+                page: page,
+                items_per_page: itemsPerPage,
+                publications
+            })
+        })
+    }
+    
+//}
 
 module.exports = {
     savePublication,
     uploadAvatar,
-    getAvatarFile
+    getAvatarFile,
+    getPublications
 }
