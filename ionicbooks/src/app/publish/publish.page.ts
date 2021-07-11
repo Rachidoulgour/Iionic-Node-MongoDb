@@ -42,9 +42,6 @@ export class PublishPage implements OnInit {
 
   async ngOnInit() {
     this.form = new FormGroup({
-      purpose:  new FormControl(null, {
-        validators: [Validators.required]
-      }),
       title: new FormControl(null, {
         validators: [Validators.required]
       }),
@@ -76,6 +73,7 @@ export class PublishPage implements OnInit {
 
   onSubmit() {
     console.log(this.identity)
+    console.log(this.form.status)
       if (this.form.status === "VALID"){
         const userId= this.identity._id
     this.publicationService.addPublication(userId, this.form.value).subscribe(
@@ -84,13 +82,13 @@ export class PublishPage implements OnInit {
           //subir imagen
           this.uploadService.makeFileRequest(this.URL + '/upload-image-pub/' + res['publication']._id, [], this.filesToUpload, this.token, 'image')
             .then((result: any) => {
-              //this.publication.file = result.image;
+              
               
               this.status = 'success';
-              this.router.navigate(['/timeline']);
+              this.router.navigate(['/tab/home']);
             });
         } else {
-          this.router.navigate(['/timeline']);
+          this.router.navigate(['/tab/home']);
           this.status = 'success';
         }
 

@@ -19,17 +19,9 @@ async function savePublication(req, res){
     publication.author = params.author.toLowerCase();
     publication.text = params.text;
     publication.file = "null";
-    publication.genre = params.genre;
-    publication.language =params.language;
-    publication.city = params.city;
-    publication.contactPhone = Number(params.contactPhone);
-    
-    publication.user = req.params.userId;
-    publication.is_exchanged = false;
-    publication.is_eliminated = false;
-    publication.purpose= params.purpose.toLowerCase();
+    publication.user = req.params.userId; 
     publication.created_at = moment().unix();
-    publication.price = 0;
+    
       
 
     publication.save((err, publicationSaved)=>{

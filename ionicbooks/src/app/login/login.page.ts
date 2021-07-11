@@ -30,9 +30,7 @@ export class LoginPage implements OnInit {
     email: "",
     password: ""
   }
-  // form: FormGroup;
-  // matcher = new MyErrorStateMatcher();
-
+  
   constructor(private authService: AuthService, 
     private tokenService: TokenService, 
     private storage: Storage,
@@ -64,22 +62,8 @@ logIn() {
     }
   )
   
-    // if (this.form.status === "VALID") {
-    //   this.authService.logIn(this.form.value).subscribe(
-    //     res => {
-    //       localStorage.setItem('token', res['token']);
-    //       localStorage.setItem('userId', JSON.stringify(res['user_id']))
-    //       // this.router.navigate(['/validate'])
-    //       // this.message = "success"
-    //     },
-    //     err => {
-    //       console.log(err)
-    //     }
-    //   )
-    // }
+    
   }
 
-  // RegisterPage() {
-  //   this.navCtrl.
-  // }
+  
 }
