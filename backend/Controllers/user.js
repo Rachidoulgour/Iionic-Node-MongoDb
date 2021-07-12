@@ -7,9 +7,9 @@ const jwt = require('jsonwebtoken')
 
 
 function saveUser(req, res) {
-    console.log("BODY",req.body)
+   
     let params = req.body;
-    console.log(params)
+    
     const user = new User();
     if (params.username && params.email && params.password) {
         user.username = params.username;

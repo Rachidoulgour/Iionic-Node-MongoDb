@@ -39,6 +39,7 @@ async function savePublication(req, res){
 
 
 async function uploadAvatar(req, res){
+    
     try{
     const publicationId = req.params.id
    
@@ -47,14 +48,17 @@ async function uploadAvatar(req, res){
         
         const file_split = file_path.split('\\');
         
-        const file_name = file_split[2];
+        const file_name = file_split[1];
+        
         const ext_split = file_name.split('\.');
+        
         const file_ext =ext_split[1]
+        
         
         if(file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'png' || file_ext == 'gif'){
             
             
-            Publication.findOne({'user':req.user._id, '_id':publicationId}).exec((err, publication)=>{
+            Publication.findOne({'_id':publicationId}).exec((err, publication)=>{
                 if(publication){
                     Publication.findByIdAndUpdate(publicationId, {file: file_name}, {new:true}, (err, publicationUpdated)=>{
                         if(err) return res.status(500).send({
@@ -91,7 +95,7 @@ function getAvatarFile(req, res){
     const avatar_file = req.params.avatarFile;
     
     const path_file = '../uploads'+avatar_file;
-    fs.exists(path_file, (exists)=>{
+    fs.access(path_file, (exists)=>{
         if(exists){
             res.sendFile(path.resolve(path_file));
         }else{
@@ -100,12 +104,12 @@ function getAvatarFile(req, res){
     })
 }
 function getPublications(req, res){
-    console.log(req.params.page)
+    
     if(req.params.page){
         page= +req.params.page;        
     }
     const itemsPerPage = 10;
-        Publication.find({is_eliminated: false}).sort('-created_at').populate('user').paginate(page, itemsPerPage, (err, publications, total)=>{
+        Publication.find().sort('-created_at').populate('user').paginate(page, itemsPerPage, (err, publications, total)=>{
             if(err) return res.status(500).send({message: 'error de recibir publicaciones'});
             if(!publications) return res.status(404).send({message: 'no hay publicaciones'});
             publications.forEach(function(publication){

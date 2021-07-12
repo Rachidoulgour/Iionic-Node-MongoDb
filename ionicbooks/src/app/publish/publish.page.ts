@@ -72,8 +72,7 @@ export class PublishPage implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.identity)
-    console.log(this.form.status)
+    
       if (this.form.status === "VALID"){
         const userId= this.identity._id
     this.publicationService.addPublication(userId, this.form.value).subscribe(

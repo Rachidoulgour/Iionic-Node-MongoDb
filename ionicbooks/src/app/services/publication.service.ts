@@ -46,9 +46,9 @@ addPublication(userId, publication){
     let headers = new HttpHeaders().set('Content-Type', 'application/json') 
     return this.http.post(this.URL + '/publication/'+userId, params, {headers});
 }
-getHomepageExchangeBooks(): Observable<any>{
+getPublications(page): Observable<any>{
   let headers = new HttpHeaders().set('Content-Type', 'application/json') 
-  return this.http.get(this.URL + '/home-exchange-books/' ,{headers});
+  return this.http.get(this.URL + '/home-publications/'+page ,{headers});
 }
 getHomepageSellBooks(): Observable<any> {
   let headers = new HttpHeaders().set('Content-Type', 'application/json') 

@@ -7,7 +7,7 @@ const multipart = require('connect-multiparty');
 const upload = multipart({uploadDir: './uploads'});
 
 api.post('/publication/:userId', PublicationController.savePublication);
-api.post('/upload-image-pub/:id', upload ,PublicationController.uploadAvatar);
+api.post('/upload-image-pub/:id', upload, PublicationController.uploadAvatar);
 api.get('/pub-image', PublicationController.getAvatarFile);
 api.get('/home-publications/:page?', PublicationController.getPublications);
 

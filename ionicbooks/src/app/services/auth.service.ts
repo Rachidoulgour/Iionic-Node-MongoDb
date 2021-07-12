@@ -13,12 +13,12 @@ export class AuthService {
 
 
   signUp(user): Observable<any>{
-    console.log(user)
+    
     return this.http.post<any>(this.URL + '/signup', user)
   }
 
   logIn(user): Observable<any>{
-    console.log(user)
+    
     return this.http.post<any>(this.URL + '/login', user)
   }
 }

@@ -14,8 +14,20 @@
             <p [routerLink]="['/timeline']">Ver más</p>
         </div>
         <div class="books">
-          <ion-list>
-          <ion-text>We r in Home</ion-text>
+          <ion-list *ngFor="let publication of publications">
+            <ion-item>
+              <ion-text></ion-text>
+              <ion-text></ion-text>
+              <ion-text></ion-text>
+              <p>{{publication.title}}</p>
+              <ion-thumbnail slot="start">
+                <ion-img [src]="publication.file"></ion-img>
+              </ion-thumbnail>
+              <p>{{publication.author}}</p>
+              <p>{{publication.text}}</p>
+
+            </ion-item>
+          <!-- <ion-text>We r in Home</ion-text> -->
           </ion-list>
         </div>
     </div>
