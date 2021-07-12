@@ -18,20 +18,14 @@ export class TokenService {
 
  async GetUser(){
   const identity = JSON.parse(await this.storage.get('auth-user'))
-  console.log(identity)
+  
   if(identity != "undefined"){
     this.identity = identity
   }else{
     this.identity = null;
   }
   return this.identity;
-  // let payload;
-  //   if(identity){
-  //     payload = identity.split('.')[1];
-  //     payload = JSON.parse(window.atob(payload))
-  //   }
-
-  //   return payload.data
+ 
   }
 
   DeleteToken() {

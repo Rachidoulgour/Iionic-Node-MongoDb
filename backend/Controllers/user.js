@@ -7,18 +7,17 @@ const jwt = require('jsonwebtoken')
 
 
 function saveUser(req, res) {
-   
+
     let params = req.body;
-    
+
     const user = new User();
     if (params.username && params.email && params.password) {
         user.username = params.username;
         user.email = params.email;
         user.password = params.password;
-        //user.terms = params.conditions;
         user.role = 'user';
         user.avatar = null;
-       
+
 
         User.find({
             $or: [{
@@ -48,9 +47,9 @@ function saveUser(req, res) {
                             const token = jwt.sign({
                                 _id: userSaved._id
                             }, process.env.TOKEN_SECRET || "Tokenimage");
-                            console.log(token)
-                            
-                            
+
+
+
                             res.json({
                                 token: token,
                                 user_id: userSaved._id,
@@ -89,8 +88,8 @@ function login(req, res) {
         });
         //console.log("Error",err)
         if (user) {
-            
-            
+
+
             bcrypt.compare(password, user.password, (err, check) => {
                 if (check) {
                     user.password = undefined;
@@ -99,7 +98,7 @@ function login(req, res) {
                     }, process.env.TOKEN_SECRET || "Tokenimage", {
                         expiresIn: 60 * 60 * 24
                     });
-                    
+
                     {
                         res.json({
                             token: token,
@@ -113,7 +112,7 @@ function login(req, res) {
                     })
                 }
             });
-        
+
         } else {
             return res.status(404).send({
                 message: 'El usuario no se ha podido identificar'
