@@ -14,7 +14,13 @@ import { MaterialModule } from './material.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, BrowserAnimationsModule, MaterialModule, HttpClientModule],
+  imports: [BrowserModule, 
+    IonicModule.forRoot(), 
+    IonicStorageModule.forRoot(), 
+    AppRoutingModule, 
+    BrowserAnimationsModule, 
+    MaterialModule, 
+    HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
